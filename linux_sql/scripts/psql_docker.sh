@@ -14,24 +14,21 @@ case $command in
 		#then get psql docker image
 		sudo docker pull postgres
 
-		#set password for default user `postgres`
+		#set password for default user `postgres` by setting this environment variable
 		export PGPASSWORD=$dbpassword
 
 		#now we run psql
 		sudo docker run --rm --name jrvs-psql -e Psql_PASSWORD=$PGPASSWORD -d -v pgdata:/var/lib/postgresql/data -p 5432:5432 postgres
 
+		#Here, --rm will remove the container when it exits, we specify that the container is named jrvs-psql
+		#	   -e is setting environment variable, -v is mounting that volume
 
-		#finally, we connect to the psql instance uing psql REPL (read–eval–print loop)
-		
+		#we can connect to the psql instance uing psql REPL (read–eval–print loop)
 		#psql -h localhost -U postgres -W
-		###Check if we need to do this in the script or not, right now I just commented it out
 		;;
 	stop)
-		#stop docker psql
+		#stop psql docker container
 		sudo docker stop jrvs-psql
-
-		#stop docker, change its status to inactive
-		sudo systemctl stop docker
 		;;
 	#any other case (not start or stop)
 	*)
