@@ -20,9 +20,11 @@ case $command in
 		#now we run psql
 		sudo docker run --rm --name jrvs-psql -e Psql_PASSWORD=$PGPASSWORD -d -v pgdata:/var/lib/postgresql/data -p 5432:5432 postgres
 
+
 		#finally, we connect to the psql instance uing psql REPL (read–eval–print loop)
-		psql -h localhost -U postgres -W
-		###Check if we need to do this in the script or not
+		
+		#psql -h localhost -U postgres -W
+		###Check if we need to do this in the script or not, right now I just commented it out
 		;;
 	stop)
 		#stop docker psql
