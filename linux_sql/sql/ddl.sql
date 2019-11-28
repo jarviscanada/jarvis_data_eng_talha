@@ -8,7 +8,7 @@ drop database if exists host_agent;
 create database host_agent;
 
 --now we switch to this database
-\connect host_agent
+\c host_agent
 
 --now we create our first table to store hardware specifications
 CREATE TABLE PUBLIC.host_info 
