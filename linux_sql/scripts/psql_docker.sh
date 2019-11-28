@@ -29,7 +29,7 @@ case $command in
 		sudo docker pull postgres
 
 		#now we check if our volume was already created or not, if not then create it
-		if [ `sudo docker volume ls | egrep "pgdata" | awk '{print $2}'` -ne "pgdata" ]
+		if [ -z `sudo docker volume ls | egrep "pgdata" | awk '{print $2}'` ]
 		then
 			sudo docker volume create pgdata
 		fi
@@ -39,7 +39,7 @@ case $command in
 
 		#now we check if container is created or not, if not then we create and run it
 		#if only one line is returned then that means this container has not been created
-		if [ `docker container ls -a -f name=jrvs-psql` -eq 1 ]
+		if [ `sudo docker container ls -a -f name=jrvs-psql | wc -l` -eq 1 ]
 		then
 			sudo docker run --name jrvs-psql -e POSTGRES_PASSWORD=$PGPASSWORD -d -v pgdata:/var/lib/postgresql/data -p 5432:5432 postgres
 			echo "jrvs-psql container has been created"
