@@ -12,9 +12,9 @@ The Linux Cluster Administration (LCA) team needs to record the hardware specifi
 Here is an architectural diagram that shows a high level overview of this Project:
 
 <p align="center">
-  ![architecture diagram](assets/architecture_diagram.png)
+  ![architecture_diagram](./assets/architecture_diagram.png)
 </p>
- ![architecture diagram](assets/architecture_diagram.png)
+ ![architecture_diagram](./assets/architecture_diagram.png)
 
 A psql instance that is stored on Server 1 is used to persist all the required data. 
 The bash agent on each server gather and insert that data into the psql instance. 
