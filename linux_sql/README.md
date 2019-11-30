@@ -36,6 +36,7 @@ Below is information on each file in the file directory (bash scripts and sql qu
 ## Usage
 
 1. **First step is to start docker and our PostgreSQL Instance**
+	
 	So for this step we need to create a PSQL instance with docker and the psql_docker.sh file will help us with that.
 	Go to the linux_sql folder and use the following command:
 	```
@@ -43,13 +44,15 @@ Below is information on each file in the file directory (bash scripts and sql qu
 	```
 	
 2. **Next is to create the database and tables**
-		The following command will create our required database and tables:
+	
+	The following command will create our required database and tables:
 	```
 	psql -h psql_host -U psql_user -f sql/ddl.sql
 	```
 	You can use 'localhost' as `psql_host` and 'postgres' as the `psql_user` as an example.
 	
 3. **Run the host_info script**
+
 	We need to store hardware specs to the table so to run this script use:
 	```
 	./scripts/host_info.sh psql_host psql_port db_name psql_user psql_password
@@ -57,6 +60,7 @@ Below is information on each file in the file directory (bash scripts and sql qu
 	Once again, an example would be 'localhost' as `psql_host`, 5432 as `psql_port`, "host_agent" as `db_name`, 'postgres' as the `psql_user`, 'mypassword' as 	`psql_password`
 	
 4. **Finally we run host_usage script every minute with crontab**
+
 	First use this command to run and edit crontab jobs:
 	```
 	crontab -e
