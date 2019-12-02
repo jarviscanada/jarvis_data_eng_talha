@@ -29,10 +29,7 @@ case $command in
 		sudo docker pull postgres
 
 		#now we check if our volume was already created or not, if not then create it
-		if [ -z `sudo docker volume ls | egrep "pgdata" | awk '{print $2}'` ]
-		then
-			sudo docker volume create pgdata
-		fi
+		sudo docker volume create pgdata
 
 		#set password for default user `postgres` by setting this environment variable
 		export PGPASSWORD=$dbpassword
