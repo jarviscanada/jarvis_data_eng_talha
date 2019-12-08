@@ -11,7 +11,7 @@ In order to use this application, we just need to specify these three arguments:
 ```
 .*sampleRegexPattern*$ /home/dev/ /tmp/grep.out
 ```
-So our specified regex pattern here is `.\*sampleRegexPattern\*$` and we recursively searching in the `/home/dev/` folder. Our program will go through all the lines in that directory recursively and search for lines that contain our regex pattern, and finally will output those matched lines to `/tmp/grep.out `
+So our specified regex pattern here is `.\*sampleRegexPattern\*$` and we recursively search in the `/home/dev/` folder. Our program will go through all the lines in that directory recursively and search for lines that contain our regex pattern, and finally will output those matched lines to `/tmp/grep.out `
 
 
 ## Pseudocode
