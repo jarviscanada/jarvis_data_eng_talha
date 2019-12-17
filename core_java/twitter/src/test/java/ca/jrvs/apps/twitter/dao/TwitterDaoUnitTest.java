@@ -36,6 +36,6 @@ class TwitterDaoUnitTest {
 
     @Test
     void deleteById() {
-        
+
     }
 }

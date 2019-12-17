@@ -53,7 +53,7 @@ public class TwitterDao implements CrdDao<Tweet, String> {
         URI uri;
 
         try {
-            //first coordinate in this list is long and second is lat
+            //first coordinate in this list is longitude and second is latitude
             List<Double> coordinatesList = tweet.getCoordinates().getCoordinates();
 
             //now set the uri
