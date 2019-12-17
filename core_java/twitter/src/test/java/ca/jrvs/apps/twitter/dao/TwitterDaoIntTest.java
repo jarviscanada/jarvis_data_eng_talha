@@ -20,6 +20,7 @@ public class TwitterDaoIntTest {
     private String idString;
     private Tweet tweet;
 
+    //Setup and also post tweet so that we can get it during our test later (and then also delete at the end)
     @Before
     public void setUp() throws JsonProcessingException {
 
