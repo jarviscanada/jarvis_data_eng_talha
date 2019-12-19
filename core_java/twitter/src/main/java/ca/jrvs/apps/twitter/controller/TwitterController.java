@@ -18,7 +18,7 @@ public class TwitterController implements Controller {
     private Service service;
 
     //@Autowired
-    public TwitterController(Service service){
+    public TwitterController(Service service) {
         this.service = service;
     }
 
@@ -32,7 +32,7 @@ public class TwitterController implements Controller {
     @Override
     public Tweet postTweet(String[] args) {
         //First we check if input has correct # of arguments
-        if (args.length != 3){
+        if (args.length != 3) {
             throw new IllegalArgumentException(
                     "Incorrect Usage: TwitterCLIApp post \"tweet_text\" \"longitude:latitude\"");
         }
@@ -82,7 +82,7 @@ public class TwitterController implements Controller {
     @Override
     public Tweet showTweet(String[] args) {
         //First we check if input has correct # of arguments
-        if (args.length != 3){
+        if (args.length != 3) {
             throw new IllegalArgumentException(
                     "Incorrect Usage: TwitterCLIApp show \"tweet_id\" \"fields (seperated by commas)\"");
         }
@@ -113,7 +113,7 @@ public class TwitterController implements Controller {
     public List<Tweet> deleteTweet(String[] args) {
 
         //First we check if input has correct # of arguments
-        if (args.length != 2){
+        if (args.length != 2) {
             throw new IllegalArgumentException(
                     "Incorrect Usage: TwitterCLIApp delete \"tweet_id,tweet_id,..\" (seperated by commas)");
         }
