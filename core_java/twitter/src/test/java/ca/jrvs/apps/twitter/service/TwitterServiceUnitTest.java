@@ -16,7 +16,6 @@ import org.mockito.junit.MockitoJUnitRunner;
 import java.util.Arrays;
 import java.util.List;
 
-//import static org.junit.Assert.*;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
@@ -32,7 +31,6 @@ public class TwitterServiceUnitTest {
 
     @Test
     public void postTweets() throws JsonProcessingException {
-
         //Whenever create is called then a new tweet is returned
         when(dao.create(any())).thenReturn(new Tweet());
 
@@ -55,7 +53,6 @@ public class TwitterServiceUnitTest {
     public void findTweets(){
         Tweet tweet = new Tweet();
 
-        //This is an id from a deleted tweet, but it shouldnt match regardless
         String id = "1207064947664019457";
 
         //Whenever findById is called then a new tweet is returned
