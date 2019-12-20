@@ -45,9 +45,6 @@ public class TwitterDaoUnitTest {
             + "   \"retweeted\":false\n"
             + "}";
 
-    //Save expected tweet to use later
-    private Tweet expectedTweet;
-
     //Set a sample ID to test later
     String testId = "1207828981791252480";
 
@@ -113,14 +110,16 @@ public class TwitterDaoUnitTest {
         when(mockHelper.httpGet(isNotNull())).thenReturn(null);
         TwitterDao spyDao = Mockito.spy(dao);
 
+        Tweet expectedTweet = JsonUtil.toObjectFromJson(tweetJsonStr, Tweet.class);
+
         //Now we mock parseResponseBody
         doReturn(expectedTweet).when(spyDao).parseResponseBody(any(), anyInt());
 
         Tweet tweet = spyDao.findById(testId);
 
         //This should also return expectedTweet so make sure it is not null
-        assertNotNull(tweet);
         assertNotNull(tweet.getText());
+        assertNotNull(tweet);
     }
 
     @Test
@@ -138,6 +137,8 @@ public class TwitterDaoUnitTest {
 
         when(mockHelper.httpPost(isNotNull())).thenReturn(null);
         TwitterDao spyDao = Mockito.spy(dao);
+
+        Tweet expectedTweet = JsonUtil.toObjectFromJson(tweetJsonStr, Tweet.class);
 
         //Now we mock parseResponseBody
         doReturn(expectedTweet).when(spyDao).parseResponseBody(any(), anyInt());
