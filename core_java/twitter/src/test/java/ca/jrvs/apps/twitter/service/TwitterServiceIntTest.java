@@ -39,15 +39,11 @@ public class TwitterServiceIntTest {
 
         HttpHelper httpHelper = new TwitterHttpHelper(CONSUMER_KEY, CONSUMER_SECRET, ACCESS_TOKEN, TOKEN_SECRET);
 
-        //Create a new twitter Dao object
         TwitterDao dao = new TwitterDao(httpHelper);
 
-        //Pass that created dao to our twitterService
         twitterService = new TwitterService(dao);
 
-
         //Now lets set up a few tweets to post, lets do it in a loop and post 3 tweets
-
         String tweetText;
         Double lat = 1d;
         Double lon = -1d;
@@ -67,7 +63,6 @@ public class TwitterServiceIntTest {
             //Check to see if both texts are the same
             assertEquals(postedTweet.getText(), postTweet.getText());
 
-            //add that tweet id to the list
             IdList.add(postedTweet.getIdStr());
             System.out.println(JsonUtil.toJson(postedTweet, true, true));
         }
@@ -75,10 +70,8 @@ public class TwitterServiceIntTest {
 
     @Test
     public void findTweets() throws JsonProcessingException {
-
         //Go through the list of ids and try to find each tweet by that id
         for (String id : IdList) {
-
             Tweet tweet = twitterService.showTweet(id, null);
             assertNotNull(tweet);
 
@@ -90,7 +83,6 @@ public class TwitterServiceIntTest {
 
     @After
     public void deleteTweets() throws JsonProcessingException {
-
         //convert IdList to string of ids and pass to deleteTweets method in twitter service
         //This will delete all those tweets, we can save those tweet objects in a list to test
         List<Tweet> deleteTweets = twitterService.deleteTweets(IdList.toArray(new String[0]));
