@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.assertNotNull;
 
 public class TwitterControllerIntTest {
 
@@ -101,7 +101,7 @@ public class TwitterControllerIntTest {
         }
 
         //Remove the last comma
-        stringOfIds.deleteCharAt(stringOfIds.length() -1);
+        //stringOfIds.deleteCharAt(stringOfIds.length() -1);
 
         //Now lets create args String to pass to controller method
         String[] args = {"delete", stringOfIds.toString()};

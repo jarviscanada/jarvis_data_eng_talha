@@ -31,7 +31,7 @@ public class TwitterCLIApp {
         String ACCESS_TOKEN = System.getenv("accessToken");
         String TOKEN_SECRET = System.getenv("tokenSecret");
 
-        //Now lets create components and chain dependencies
+        //Create components and chain dependencies
         HttpHelper httpHelper = new TwitterHttpHelper(CONSUMER_KEY, CONSUMER_SECRET, ACCESS_TOKEN,
                 TOKEN_SECRET);
         CrdDao dao = new TwitterDao(httpHelper);
@@ -39,18 +39,15 @@ public class TwitterCLIApp {
         Controller controller = new TwitterController(service);
         TwitterCLIApp app = new TwitterCLIApp(controller);
 
-        //Now we can start our app
         app.run(args);
     }
 
     private void run(String[] args) {
-
-        //First check if there are no arguments
         if (args.length == 0){
             throw new IllegalArgumentException("USAGE: TwitterCLIApp post|show|delete [options]");
         }
 
-        //Now lets handle the user input by sending it to controller
+        //Handle the user input by sending it to controller
         switch (args[0].toLowerCase()){
             case "post":
                 printTweet(controller.postTweet(args));
@@ -74,6 +71,4 @@ public class TwitterCLIApp {
             throw new RuntimeException("Unable to convert tweet object to string ",  e);
         }
     }
-
-
 }
