@@ -11,20 +11,23 @@ import ca.jrvs.apps.twitter.service.Service;
 import ca.jrvs.apps.twitter.service.TwitterService;
 import ca.jrvs.apps.twitter.util.JsonUtil;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+@Component
 public class TwitterCLIApp {
 
     private Controller controller;
 
-    //@Autowired
+    @Autowired
     public TwitterCLIApp(Controller controller){
         this.controller = controller;
     }
 
     public static void main(String[] args) {
-
+        
         //First lets get secrets from environment variables
         String CONSUMER_KEY = System.getenv("consumerKey");
         String CONSUMER_SECRET = System.getenv("consumerSecret");
@@ -42,7 +45,7 @@ public class TwitterCLIApp {
         app.run(args);
     }
 
-    private void run(String[] args) {
+    public void run(String[] args) {
         if (args.length == 0){
             throw new IllegalArgumentException("USAGE: TwitterCLIApp post|show|delete [options]");
         }
