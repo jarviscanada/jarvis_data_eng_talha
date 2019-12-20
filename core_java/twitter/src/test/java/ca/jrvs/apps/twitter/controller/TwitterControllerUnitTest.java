@@ -36,7 +36,6 @@ public class TwitterControllerUnitTest {
         //Lets just set the expected tweet to a new tweet object (should be null)
         Tweet expectedTweet = new Tweet();
 
-        //Return expectedTweet
         when(mock.postTweet(any())).thenReturn(expectedTweet);
 
         try {
@@ -59,7 +58,6 @@ public class TwitterControllerUnitTest {
         //Lets just set the expected tweet to a new tweet object (should be null)
         Tweet expectedTweet = new Tweet();
 
-        //Return expectedTweet
         when(mock.showTweet(any(), any())).thenReturn(expectedTweet);
 
         try {
@@ -82,10 +80,9 @@ public class TwitterControllerUnitTest {
         //Lets just set the expected tweet to a new tweet object (should be null)
         Tweet expectedTweet = new Tweet();
 
-        //Return listOfTweets
         List<Tweet> listOfTweets = new ArrayList<Tweet>();
 
-        //Lets add 3 new null tweets
+        //Add 3 new null tweets
         listOfTweets.add(expectedTweet);
         listOfTweets.add(expectedTweet);
         listOfTweets.add(expectedTweet);

@@ -27,7 +27,6 @@ public class TwitterControllerIntTest {
 
     @BeforeClass
     public static void setUp() throws JsonProcessingException {
-
         String CONSUMER_KEY = System.getenv("consumerKey");
         String CONSUMER_SECRET = System.getenv("consumerSecret");
         String ACCESS_TOKEN = System.getenv("accessToken");
@@ -39,13 +38,10 @@ public class TwitterControllerIntTest {
         HttpHelper httpHelper = new TwitterHttpHelper(CONSUMER_KEY, CONSUMER_SECRET, ACCESS_TOKEN,
                 TOKEN_SECRET);
 
-        //Create a new twitter Dao object
         TwitterDao dao = new TwitterDao(httpHelper);
 
-        //Pass that created dao to our twitterService
         Service twitterService = new TwitterService(dao);
 
-        //Now we pass that twitterService to our controller
         controller = new TwitterController(twitterService);
     }
 
@@ -75,10 +71,8 @@ public class TwitterControllerIntTest {
 
         //Since we added all the ids to our IdList variable, lets loop through them
         for (String id : IdList) {
-            //setup arguments for each tweet
             args = new String[]{"show", id, "id"};
 
-            //Call our showTweet method in controller
             Tweet tweet = controller.showTweet(args);
 
             //Make sure the tweet we found is not Null
@@ -92,7 +86,6 @@ public class TwitterControllerIntTest {
 
     @After
     public void deleteTweets() throws Exception {
-
         //Lets build the string of arrays by appending commands inbetween
         StringBuilder stringOfIds = new StringBuilder();
 
