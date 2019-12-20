@@ -27,18 +27,16 @@ public class TwitterService implements Service {
      */
     @Override
     public Tweet postTweet(Tweet tweet) {
-
-        //First we get longitude and latitude values from tweet
+        //Get longitude and latitude values from tweet
         Double lon = tweet.getCoordinates().getCoordinates().get(0);
         Double lat = tweet.getCoordinates().getCoordinates().get(1);
 
-        //Now lets do our check to see if the values are valid and throw exception if invalid
+        //Check to see if the values are valid and throw exception if invalid
         if (lon > 180.0 || lon < -180.0 || lat > 90.0 || lat < -90.0) {
             throw new IllegalArgumentException();
         }
 
-        //Also check if tweet length is within limit
-        //Kept it to 140 characters for our app (but twitter allows for up to 280)
+        //Also check if tweet length is within our limit
         if (tweet.getText().length() > 140) {
             throw new IllegalArgumentException();
         }
@@ -57,13 +55,12 @@ public class TwitterService implements Service {
      */
     @Override
     public Tweet showTweet(String id, String[] fields) {
-
-        //First check if given id is valid (if it is all digits)
+        //Check if given id is valid (if it is all digits)
         if (!Pattern.matches("^\\d+$", id)) {
             throw new IllegalArgumentException();
         }
 
-        //Now just return tweet object found by that id
+        //Return tweet object found by that id
         return (Tweet) dao.findById(id);
     }
 
@@ -76,22 +73,16 @@ public class TwitterService implements Service {
      */
     @Override
     public List<Tweet> deleteTweets(String[] ids) {
-
-        //Create a list of deleted tweets
         List<Tweet> deleteTweets = new ArrayList<Tweet>();
 
-        //go through all the given ids
         for (String id : ids) {
-
             //Need to check if id is valid
             if (!Pattern.matches("^\\d+$", id)) {
                 throw new IllegalArgumentException();
             }
 
-            //add it to the list after calling deleteById method on it
             deleteTweets.add((Tweet) dao.deleteById(id));
         }
-
         return deleteTweets;
     }
 }

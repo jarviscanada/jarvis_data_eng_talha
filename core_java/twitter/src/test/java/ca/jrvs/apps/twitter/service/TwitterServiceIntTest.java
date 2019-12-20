@@ -8,7 +8,7 @@ import ca.jrvs.apps.twitter.model.Tweet;
 import ca.jrvs.apps.twitter.util.JsonUtil;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.junit.After;
-import org.junit.BeforeClass;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -16,7 +16,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.assertNotNull;
 
 public class TwitterServiceIntTest {
 
@@ -25,8 +25,9 @@ public class TwitterServiceIntTest {
     //Create a list of Ids
     private List<String> IdList = new ArrayList<String>();
 
-    @BeforeClass
-    public static void setUp() throws JsonProcessingException {
+    //Setup and also post tweet so that we can get it during our test later (and then also delete at the end)
+    @Before
+    public void setUp() throws JsonProcessingException {
 
         String CONSUMER_KEY = System.getenv("consumerKey");
         String CONSUMER_SECRET = System.getenv("consumerSecret");
@@ -38,15 +39,9 @@ public class TwitterServiceIntTest {
 
         HttpHelper httpHelper = new TwitterHttpHelper(CONSUMER_KEY, CONSUMER_SECRET, ACCESS_TOKEN, TOKEN_SECRET);
 
-        //Create a new twitter Dao object
         TwitterDao dao = new TwitterDao(httpHelper);
 
-        //Pass that created dao to our twitterService
         twitterService = new TwitterService(dao);
-    }
-
-    @Test
-    public void postTweets() throws JsonProcessingException {
 
         //Now lets set up a few tweets to post, lets do it in a loop and post 3 tweets
         String tweetText;
@@ -65,13 +60,9 @@ public class TwitterServiceIntTest {
 
             Tweet postedTweet = twitterService.postTweet(postTweet);
 
-            //Test to make sure the tweet we just posted is not Null
-            assertNotNull(postedTweet);
-
             //Check to see if both texts are the same
             assertEquals(postedTweet.getText(), postTweet.getText());
 
-            //add that tweet id to the list
             IdList.add(postedTweet.getIdStr());
             System.out.println(JsonUtil.toJson(postedTweet, true, true));
         }
@@ -79,10 +70,8 @@ public class TwitterServiceIntTest {
 
     @Test
     public void findTweets() throws JsonProcessingException {
-
         //Go through the list of ids and try to find each tweet by that id
         for (String id : IdList) {
-
             Tweet tweet = twitterService.showTweet(id, null);
             assertNotNull(tweet);
 
@@ -94,8 +83,7 @@ public class TwitterServiceIntTest {
 
     @After
     public void deleteTweets() throws JsonProcessingException {
-
-        //convert IdList to array containing those IDs and pass to deleteTweets method in twitter service
+        //convert IdList to string of ids and pass to deleteTweets method in twitter service
         //This will delete all those tweets, we can save those tweet objects in a list to test
         List<Tweet> deleteTweets = twitterService.deleteTweets(IdList.toArray(new String[0]));
 

@@ -18,10 +18,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
@@ -39,7 +36,6 @@ public class TwitterControllerUnitTest {
         //Lets just set the expected tweet to a new tweet object (should be null)
         Tweet expectedTweet = new Tweet();
 
-        //Return expectedTweet
         when(mock.postTweet(any())).thenReturn(expectedTweet);
 
         try {
@@ -62,7 +58,6 @@ public class TwitterControllerUnitTest {
         //Lets just set the expected tweet to a new tweet object (should be null)
         Tweet expectedTweet = new Tweet();
 
-        //Return expectedTweet
         when(mock.showTweet(any(), any())).thenReturn(expectedTweet);
 
         try {
@@ -85,10 +80,9 @@ public class TwitterControllerUnitTest {
         //Lets just set the expected tweet to a new tweet object (should be null)
         Tweet expectedTweet = new Tweet();
 
-        //Return listOfTweets
         List<Tweet> listOfTweets = new ArrayList<Tweet>();
 
-        //Lets add 3 new null tweets
+        //Add 3 new null tweets
         listOfTweets.add(expectedTweet);
         listOfTweets.add(expectedTweet);
         listOfTweets.add(expectedTweet);

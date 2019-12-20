@@ -33,13 +33,11 @@ public class TwitterController implements Controller {
      */
     @Override
     public Tweet postTweet(String[] args) {
-        //First we check if input has correct # of arguments
         if (args.length != 3) {
             throw new IllegalArgumentException(
                     "Incorrect Usage: TwitterCLIApp post \"tweet_text\" \"longitude:latitude\"");
         }
 
-        //Setup variables
         String tweet_text = args[1];
         String coordinates = args[2];
         String coordArray[] = coordinates.split(COORD_SEP);
@@ -83,13 +81,11 @@ public class TwitterController implements Controller {
      */
     @Override
     public Tweet showTweet(String[] args) {
-        //First we check if input has correct # of arguments
         if (args.length != 3) {
             throw new IllegalArgumentException(
                     "Incorrect Usage: TwitterCLIApp show \"tweet_id\" \"fields (seperated by commas)\"");
         }
 
-        //Lets save id into variable
         String id = args[1];
 
         //Check if ID specified by user is valid
@@ -97,7 +93,6 @@ public class TwitterController implements Controller {
             throw new IllegalArgumentException("Tweet ID is not correct format");
         }
 
-        //Get all fields in an array of strings
         String[] allFields = args[2].split(COMMA);
 
         //Finally we can call showTweet method in service
@@ -113,14 +108,11 @@ public class TwitterController implements Controller {
      */
     @Override
     public List<Tweet> deleteTweet(String[] args) {
-
-        //First we check if input has correct # of arguments
         if (args.length != 2) {
             throw new IllegalArgumentException(
                     "Incorrect Usage: TwitterCLIApp delete \"tweet_id,tweet_id,..\" (seperated by commas)");
         }
 
-        //Now lets save all the ids in an Array after splitting them
         String[] allIDs = args[1].split(COMMA);
 
         //Check if all the IDs specified by user are valid
