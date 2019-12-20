@@ -16,13 +16,13 @@ import static org.junit.Assert.*;
 
 public class TwitterDaoIntTest {
 
-    private TwitterDao dao;
+    private static TwitterDao dao;
     private String idString;
     private Tweet tweet;
 
     //Setup and also post tweet so that we can get it during our test later (and then also delete at the end)
-    @Before
-    public void setUp() throws JsonProcessingException {
+    @BeforeClass
+    public static void setUp() throws JsonProcessingException {
 
         String CONSUMER_KEY = System.getenv("consumerKey");
         String CONSUMER_SECRET = System.getenv("consumerSecret");
@@ -34,12 +34,14 @@ public class TwitterDaoIntTest {
 
         HttpHelper httpHelper = new TwitterHttpHelper(CONSUMER_KEY, CONSUMER_SECRET, ACCESS_TOKEN, TOKEN_SECRET);
 
-        // Creating new TwitterDao object using the created httpHelper
-        this.dao = new TwitterDao(httpHelper);
+        //Creating new TwitterDao object using the created httpHelper
+        dao = new TwitterDao(httpHelper);
+    }
 
+    @Before
+    public void postTweet() throws JsonProcessingException {
 
         //Create new tweet and test it here
-
         String text = "test_tweet_" + System.currentTimeMillis();
         Double lat = 1d;
         Double lon = -1d;
@@ -70,6 +72,8 @@ public class TwitterDaoIntTest {
 
     @Test
     public void findTweet() throws JsonProcessingException {
+
+        //Now lets try to find the tweet we created by calling findById method
         Tweet findTweet = dao.findById(tweet.getIdStr());
 
         System.out.println(JsonUtil.toJson(findTweet, true, true));
@@ -80,6 +84,7 @@ public class TwitterDaoIntTest {
 
     @After
     public void deleteTweet() throws JsonProcessingException {
+        //Finally lets delete the tweet by calling deleteByIdMethod
         Tweet deleteTweet = dao.deleteById(tweet.getIdStr());
 
         System.out.println(JsonUtil.toJson(deleteTweet, true, false));
