@@ -49,14 +49,11 @@ public class TwitterDao implements CrdDao<Tweet, String> {
      */
     @Override
     public Tweet create(Tweet tweet) {
-        //First lets construct URI
         URI uri;
 
         try {
-            //first coordinate in this list is long and second is lat
+            //first coordinate in this list is longitude and second is latitude
             List<Double> coordinatesList = tweet.getCoordinates().getCoordinates();
-
-            //now set the uri
             uri = new URI(API_BASE_URI + POST_PATH + QUERY_SYM + STATUS + EQUAL + tweet.getText()
                     + "&long=" + coordinatesList.get(0) +"&lat=" + coordinatesList.get(1));
         }
@@ -64,27 +61,24 @@ public class TwitterDao implements CrdDao<Tweet, String> {
             throw new IllegalArgumentException("Invalid tweet input given", e);
         }
 
-        //Execute HTTP Request
         HttpResponse response = httpHelper.httpPost(uri);
 
-        //Validate response and deserialize response to tweet object
         return parseResponseBody(response, HTTP_OK);
     }
 
-    private Tweet parseResponseBody(HttpResponse response, int expectedStatusCode) {
+    public Tweet parseResponseBody(HttpResponse response, int expectedStatusCode) {
         Tweet tweet = null;
 
         //Check response status
         int status = response.getStatusLine().getStatusCode();
-
         if (status != expectedStatusCode) {
             try {
                 System.out.println(EntityUtils.toString(response.getEntity()));
             }
             catch (IOException e) {
                 System.out.println("Response has no entity");
+                throw new RuntimeException("Unexpected HTTP Status: " + status);
             }
-            throw new RuntimeException("Unexpected HTTP Status: " + status);
         }
 
         if (response.getEntity() == null) {
@@ -99,7 +93,6 @@ public class TwitterDao implements CrdDao<Tweet, String> {
         catch (IOException e) {
             throw new RuntimeException("Failed to convert entity to string");
         }
-
 
         //finally, we deserialize JSON string to Tweet object
         try {
@@ -120,21 +113,17 @@ public class TwitterDao implements CrdDao<Tweet, String> {
      */
     @Override
     public Tweet findById(String s) {
-        //First lets construct URI
         URI uri;
 
         try {
-            //now set the uri
             uri = new URI(API_BASE_URI + SHOW_PATH + QUERY_SYM + "id=" + s);
         }
         catch (URISyntaxException e) {
             throw new IllegalArgumentException("Invalid tweet input given", e);
         }
 
-        //Execute HTTP Request
         HttpResponse response = httpHelper.httpGet(uri);
 
-        //Validate response and deserialize response to tweet object
         return parseResponseBody(response, HTTP_OK);
     }
 
@@ -146,22 +135,17 @@ public class TwitterDao implements CrdDao<Tweet, String> {
      */
     @Override
     public Tweet deleteById(String s) {
-        //First lets construct URI
         URI uri;
 
         try {
-            //now set the uri
             uri = new URI(API_BASE_URI + DELETE_PATH + "/" + s + ".json");
         }
         catch (URISyntaxException e) {
             throw new IllegalArgumentException("Invalid tweet input given", e);
         }
 
-        //Execute HTTP Request
         HttpResponse response = httpHelper.httpPost(uri);
 
-        //Validate response and deserialize response to tweet object
         return parseResponseBody(response, HTTP_OK);
     }
-
 }
