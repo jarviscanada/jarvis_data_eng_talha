@@ -52,7 +52,7 @@ public class TwitterControllerUnitTest {
         }
 
         //This should work as it has 3 arguments, and return a null tweet
-        Tweet tweet = controller.postTweet(new String[] {"post", "sample text", "1.0:-1.0"});
+        Tweet tweet = controller.postTweet(new String[] {"post", "Test_Text", "1.0:-1.0"});
         assertEquals(tweet.getText(), null);
         assertEquals(tweet.getId(), null);
     }
