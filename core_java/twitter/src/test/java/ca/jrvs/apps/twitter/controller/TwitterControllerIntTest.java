@@ -107,5 +107,4 @@ public class TwitterControllerIntTest {
             System.out.println(JsonUtil.toJson(tweet, true, true));
         }
     }
-
 }
