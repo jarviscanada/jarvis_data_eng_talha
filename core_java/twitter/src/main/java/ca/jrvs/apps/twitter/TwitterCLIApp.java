@@ -11,14 +11,17 @@ import ca.jrvs.apps.twitter.service.Service;
 import ca.jrvs.apps.twitter.service.TwitterService;
 import ca.jrvs.apps.twitter.util.JsonUtil;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+@Component
 public class TwitterCLIApp {
 
     private Controller controller;
 
-    //@Autowired
+    @Autowired
     public TwitterCLIApp(Controller controller){
         this.controller = controller;
     }
@@ -43,7 +46,7 @@ public class TwitterCLIApp {
         app.run(args);
     }
 
-    private void run(String[] args) {
+    public void run(String[] args) {
 
         //First check if there are no arguments
         if (args.length == 0){
