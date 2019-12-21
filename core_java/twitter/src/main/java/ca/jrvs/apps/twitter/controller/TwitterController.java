@@ -81,9 +81,9 @@ public class TwitterController implements Controller {
      */
     @Override
     public Tweet showTweet(String[] args) {
-        if (args.length != 3) {
+        if (args.length != 2) {
             throw new IllegalArgumentException(
-                    "Incorrect Usage: TwitterCLIApp show \"tweet_id\" \"fields (seperated by commas)\"");
+                    "Incorrect Usage: TwitterCLIApp show \"tweet_id\"");
         }
 
         String id = args[1];
@@ -93,10 +93,8 @@ public class TwitterController implements Controller {
             throw new IllegalArgumentException("Tweet ID is not correct format");
         }
 
-        String[] allFields = args[2].split(COMMA);
-
         //Finally we can call showTweet method in service
-        return service.showTweet(id, allFields);
+        return service.showTweet(id, null);
     }
 
     /**

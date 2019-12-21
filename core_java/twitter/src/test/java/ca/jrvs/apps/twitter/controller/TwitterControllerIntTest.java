@@ -71,7 +71,7 @@ public class TwitterControllerIntTest {
 
         //Since we added all the ids to our IdList variable, lets loop through them
         for (String id : IdList) {
-            args = new String[]{"show", id, "id"};
+            args = new String[]{"show", id};
 
             Tweet tweet = controller.showTweet(args);
 
@@ -84,6 +84,7 @@ public class TwitterControllerIntTest {
         }
     }
 
+    /*
     @After
     public void deleteTweets() throws Exception {
         //Lets build the string of arrays by appending commands inbetween
@@ -107,4 +108,6 @@ public class TwitterControllerIntTest {
             System.out.println(JsonUtil.toJson(tweet, true, true));
         }
     }
+
+     */
 }

@@ -61,7 +61,7 @@ public class TwitterControllerUnitTest {
         when(mock.showTweet(any(), any())).thenReturn(expectedTweet);
 
         try {
-            //Should not work because no id and no coordinates
+            //Should not work because empty id
             controller.showTweet(new String[]{"show", ""});
             fail();
         }
@@ -69,8 +69,8 @@ public class TwitterControllerUnitTest {
             assertTrue(true);
         }
 
-        //This should work as it has 3 arguments, and return a null tweet
-        Tweet tweet = controller.showTweet(new String[]{"show", "1207064947664019457", "id"});
+        //This should work as it has 2 arguments, and return a null tweet
+        Tweet tweet = controller.showTweet(new String[]{"show", "1207064947664019457"});
         assertEquals(tweet.getText(), null);
         assertEquals(tweet.getId(), null);
     }
