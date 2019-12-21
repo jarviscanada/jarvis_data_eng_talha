@@ -84,7 +84,6 @@ public class TwitterControllerIntTest {
         }
     }
 
-    /*
     @After
     public void deleteTweets() throws Exception {
         //Lets build the string of arrays by appending commands inbetween
@@ -95,7 +94,7 @@ public class TwitterControllerIntTest {
         }
 
         //Remove the last comma
-        //stringOfIds.deleteCharAt(stringOfIds.length() -1);
+        stringOfIds.deleteCharAt(stringOfIds.length() -1);
 
         //Now lets create args String to pass to controller method
         String[] args = {"delete", stringOfIds.toString()};
@@ -108,6 +107,4 @@ public class TwitterControllerIntTest {
             System.out.println(JsonUtil.toJson(tweet, true, true));
         }
     }
-
-     */
 }
