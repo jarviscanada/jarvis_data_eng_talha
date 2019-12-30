@@ -33,24 +33,24 @@ mvn package
 ```
 3.	Now we can run commands to actually get, post, or delete Tweets. We can do so with the following type of command:
 ``` Bash
-java -cp target/twitter-1.0-SNAPSHOT.jar post|show|delete [additional arguments]
+java -jar target/twitter-1.0-SNAPSHOT.jar post|show|delete [additional arguments]
 ```
 
 Below are the formats required for post, show, and delete options:
 
 For posting a Tweet:
 ``` Bash
-java -cp target/twitter-1.0-SNAPSHOT.jar post "tweet_text" "Longitude:Latitude"
+java -jar target/twitter-1.0-SNAPSHOT.jar post "tweet_text" "Longitude:Latitude"
 ```
 
 For showing a Tweet:
 ``` Bash
-java -cp target/twitter-1.0-SNAPSHOT.jar show "tweet_id"
+java -jar target/twitter-1.0-SNAPSHOT.jar show "tweet_id"
 ```
 
 For deleting a Tweet:
 ``` Bash
-java -cp target/twitter-1.0-SNAPSHOT.jar delete "tweet_id1,tweet_id2,..."
+java -jar target/twitter-1.0-SNAPSHOT.jar delete "tweet_id1,tweet_id2,..."
 ```
 ## Model
 
