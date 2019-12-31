@@ -121,6 +121,6 @@ public class TwitterController implements Controller {
         }
 
         //Lastly, we can call our deleteTweets method with given args
-        return service.deleteTweets(args);
+        return service.deleteTweets(allIDs);
     }
 }
