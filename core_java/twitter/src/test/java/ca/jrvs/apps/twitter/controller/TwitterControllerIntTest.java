@@ -10,6 +10,7 @@ import ca.jrvs.apps.twitter.util.JsonUtil;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.junit.After;
 import org.junit.BeforeClass;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -21,12 +22,12 @@ import static org.junit.Assert.assertNotNull;
 public class TwitterControllerIntTest {
 
     //Create a private twitterController to test
-    private static TwitterController controller;
-    //Create a list of Ids
-    private List<String> IdList = new ArrayList<String>();
+    private TwitterController controller;
+    //Create a list of tweets
+    private List<Tweet> tweets;
 
-    @BeforeClass
-    public static void setUp() throws JsonProcessingException {
+    @Before
+    public void setup() {
         String CONSUMER_KEY = System.getenv("consumerKey");
         String CONSUMER_SECRET = System.getenv("consumerSecret");
         String ACCESS_TOKEN = System.getenv("accessToken");
@@ -43,14 +44,12 @@ public class TwitterControllerIntTest {
         Service twitterService = new TwitterService(dao);
 
         controller = new TwitterController(twitterService);
-    }
 
-    @Test
-    public void postTweets() throws Exception {
-        //Now lets set up a few tweets to post, lets do it in a loop and post 3 tweets
+        tweets = new ArrayList<>();
         String[] args;
 
-        for (int i = 0; i < 3; i++) {
+        //Now lets set up a few tweets to post, lets do it in a loop and post 3 tweets
+        for(int i = 0; i < 3; i++) {
             //args is an array of strings we need to pass to the controller postTweet method
             args = new String[] {"post", "test_tweet_" + System.currentTimeMillis(), "-1.0:1.0" };
 
@@ -58,46 +57,46 @@ public class TwitterControllerIntTest {
 
             //Test to make sure the tweet we just posted is not Null
             assertNotNull(tweet);
-
-            //Add its Id to our list of ids (needed later)
-            IdList.add(tweet.getIdStr());
+            tweets.add(tweet);
         }
     }
 
     @Test
-    public void findTweets() throws Exception {
+    public void showTweets() throws Exception {
         //Now lets do a test to find and show those tweets we just created
         String[] args;
 
-        //Since we added all the ids to our IdList variable, lets loop through them
-        for (String id : IdList) {
-            args = new String[]{"show", id};
+        //Loop through the list of tweets
+        for (Tweet foundTweet : tweets) {
 
+            long id = foundTweet.getId();
+            args = new String[]{"show", Long.toString(id)};
             Tweet tweet = controller.showTweet(args);
 
             //Make sure the tweet we found is not Null
             assertNotNull(tweet);
 
             //Check to see if the Id's match
-            assertEquals(tweet.getIdStr(), id);
+            assertEquals(tweet.getIdStr(), Long.toString(id));
             System.out.println(JsonUtil.toJson(tweet, true, true));
         }
     }
 
     @After
     public void deleteTweets() throws Exception {
-        //Lets build the string of arrays by appending commands inbetween
-        StringBuilder stringOfIds = new StringBuilder();
+        //Finally lets delete all the created tweets
+        String[] idList  = new String[3];
+        String[] args;
 
-        for (String id : IdList) {
-            stringOfIds.append(id + ",");
+        //Keep track of our index to set our idList with each tweetId
+        int i = 0;
+
+        for (Tweet tweet : tweets) {
+            idList[i] = Long.toString(tweet.getId());
+            i++;
         }
 
-        //Remove the last comma
-        stringOfIds.deleteCharAt(stringOfIds.length() -1);
-
-        //Now lets create args String to pass to controller method
-        String[] args = {"delete", stringOfIds.toString()};
+        args = new String[]{"delete", String.join(",", idList)};
 
         List<Tweet> deleteTweets = controller.deleteTweet(args);
 
