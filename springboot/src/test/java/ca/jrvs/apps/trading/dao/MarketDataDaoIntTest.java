@@ -51,6 +51,34 @@ public class MarketDataDaoIntTest {
     }
 
     @Test
+    public void unImplementedMethods() {
+        //Test unimplemented methods
+        try {
+            dao.existsById("AAPL");
+            fail();
+        }
+        catch (UnsupportedOperationException e) {
+            assertTrue(true);
+        }
+
+        try {
+            dao.findAll();
+            fail();
+        }
+        catch (UnsupportedOperationException e) {
+            assertTrue(true);
+        }
+
+        try {
+            dao.count();
+            fail();
+        }
+        catch (UnsupportedOperationException e) {
+            assertTrue(true);
+        }
+    }
+
+    @Test
     public void findByTicker() {
         String ticker = "AAPL";
         IexQuote iexQuote = dao.findById(ticker).get();

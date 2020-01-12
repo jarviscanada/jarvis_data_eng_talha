@@ -1,21 +1,17 @@
 package ca.jrvs.apps.trading;
 
-import ca.jrvs.apps.trading.dao.MarketDataDao;
 import ca.jrvs.apps.trading.model.config.MarketDataConfig;
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
-import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
 
 import javax.sql.DataSource;
 
-//@Component
-//@EnableTransactionManagement
-public class AppConfig {
-    private Logger logger = LoggerFactory.getLogger(AppConfig.class);
+@Configuration
+@ComponentScan(basePackages = {"ca.jrvs.apps.trading.dao", "ca.jrvs.apps.trading.service"})
+public class TestConfig {
 
     @Bean
     public MarketDataConfig marketDataConfig() {
@@ -36,6 +32,7 @@ public class AppConfig {
 
     @Bean
     public DataSource dataSource() {
+        System.out.println("Creating apacheDataSource");
         String url = System.getenv("PSQL_URL");
         String user = System.getenv("PSQL_USER");
         String password = System.getenv("PSQL_PASSWORD");
