@@ -32,6 +32,8 @@ public class QuoteServiceIntTest {
 
     @Before
     public void setUp() {
+        quoteDao.deleteAll();
+
         //Lets create three quotes and save them with save method in dao
         Quote quote = new Quote();
         Quote quote2 = new Quote();
