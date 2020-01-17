@@ -64,14 +64,6 @@ public class AccountDaoIntTest {
     public void unImplementedMethods() {
         //Test unimplemented methods
         try {
-            accountDao.updateOne(savedAccount);
-            fail();
-        }
-        catch (UnsupportedOperationException e) {
-            assertTrue(true);
-        }
-
-        try {
             accountDao.delete(savedAccount);
             fail();
         }
