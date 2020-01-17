@@ -85,7 +85,7 @@ public class QuoteDaoIntTest {
     public void QuoteDaoMethods() {
         //Lets add one quote
         Quote quote = new Quote();
-        quote.setID("TESTTICKER");
+        quote.setID("TestTicker");
         quote.setAskPrice(10d);
         quote.setAskSize(10);
         quote.setBidPrice(10.2d);
@@ -100,7 +100,7 @@ public class QuoteDaoIntTest {
 
         //Now lets try to update quote
         quote = new Quote();
-        quote.setID("TESTTICKER");
+        quote.setID("TestTicker");
         quote.setAskPrice(20d);
         quote.setAskSize(20);
         quote.setBidPrice(20.2d);
