@@ -37,17 +37,20 @@ public class DashboardService {
     }
 
     public TraderAccountView getTraderAccount(Integer traderId) {
-
+        //First check if tradeId is null
         if (traderId == null) {
-            throw new IllegalArgumentException("traderId must be nonempty");
+            throw new IllegalArgumentException("traderId must not be null");
         }
-
-        TraderAccountView traderAccountView = new TraderAccountView();
+        
+        //Check if trader and account can be found
         Trader trader = traderDao.findById(traderId)
-                .orElseThrow(() -> new IllegalArgumentException("Trader not found"));
+                .orElseThrow(() -> new IllegalArgumentException("Trader not found with specified id"));
         Account account = accountDao.findById(traderId)
-                .orElseThrow(() -> new IllegalArgumentException("Trader's Account not found"));
+                .orElseThrow(() -> new IllegalArgumentException("Account not found with specified id"));
+        
+        TraderAccountView traderAccountView = new TraderAccountView();
 
+        //Create and return traderAccountView
         traderAccountView.setTrader(trader);
         traderAccountView.setAccount(account);
 
@@ -55,32 +58,37 @@ public class DashboardService {
     }
 
     public PortfolioView getProfileViewByTraderId(Integer traderId) {
+        //First check if tradeId is null
         if (traderId == null) {
             throw new IllegalArgumentException("traderId must be nonempty");
         }
+        
+        //Check if account can be found
+        Account account = accountDao.findById(traderId)
+                .orElseThrow(() -> new IllegalArgumentException("Account not found with specified id"));
 
         PortfolioView portfolioView = new PortfolioView();
-        Account account = accountDao.findById(traderId)
-                .orElseThrow(() -> new IllegalArgumentException("Trader's account not found"));
 
-        //List<Position> positions = Arrays.asList(positionDao.findById(account.getId()).get());
         List<Position> positions = Lists
                 .newArrayList(positionDao.findAllById(Arrays.asList(account.getId())));
 
-        List<SecurityRow> securityRows = new ArrayList<>();
+        List<SecurityRow> securityRowsList = new ArrayList<>();
         SecurityRow securityRow;
-        String currentTicker;
+        String ticker;
+        
         for (Position position : positions) {
+            //Setup new securityRow and add to list
             securityRow = new SecurityRow();
             securityRow.setPosition(position);
-            currentTicker = position.getTicker();
-            securityRow.setQuote(quoteDao.findById(currentTicker).orElseThrow(() ->
-                    new IllegalArgumentException("Quote with specified ticker not found")));
-            securityRow.setTicker(currentTicker);
-            securityRows.add(securityRow);
+            ticker = position.getTicker();
+            securityRow.setTicker(ticker);
+            securityRow.setQuote(quoteDao.findById(ticker).orElseThrow(() ->
+                    new IllegalArgumentException("Quote not found with specified ticker")));
+            
+            securityRowsList.add(securityRow);
         }
 
-        portfolioView.setSecurityRows(securityRows);
+        portfolioView.setSecurityRows(securityRowsList);
         return portfolioView;
     }
 }
