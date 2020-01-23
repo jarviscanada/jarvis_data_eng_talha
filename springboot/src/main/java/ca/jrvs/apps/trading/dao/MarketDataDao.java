@@ -130,13 +130,12 @@ public class MarketDataDao implements CrudRepository<IexQuote, String> {
             HttpResponse response = httpClient.execute(httpGet);
             int status = response.getStatusLine().getStatusCode();
 
-            if (status == 200) {
-                HttpEntity responseBody = response.getEntity();
-                return Optional.of(EntityUtils.toString(responseBody));
-            }
-            else {
+            if (status != 200) {
                 throw new DataRetrievalFailureException("Unexpected status code: " + status);
             }
+
+            HttpEntity responseBody = response.getEntity();
+            return Optional.of(EntityUtils.toString(responseBody));
         }
         catch (IOException e) {
             throw new DataRetrievalFailureException("HTTP Get Request failed");
@@ -150,7 +149,6 @@ public class MarketDataDao implements CrudRepository<IexQuote, String> {
     private CloseableHttpClient getHttpClient() {
         return HttpClients.custom()
                 .setConnectionManager(httpClientConnectionManager)
-                //Prevent connectionManager shutdown when calling httpClient.close()
                 .setConnectionManagerShared(true)
                 .build();
     }
