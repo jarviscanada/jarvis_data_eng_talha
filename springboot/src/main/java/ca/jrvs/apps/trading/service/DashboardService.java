@@ -36,6 +36,11 @@ public class DashboardService {
         this.quoteDao = quoteDao;
     }
 
+    /**
+     * Returns Trader Account View for specified trader
+     * @param traderId
+     * @return
+     */
     public TraderAccountView getTraderAccount(Integer traderId) {
         //First check if tradeId is null
         if (traderId == null) {
@@ -57,6 +62,11 @@ public class DashboardService {
         return traderAccountView;
     }
 
+    /**
+     * Returns Trader's Account details
+     * @param traderId
+     * @return
+     */
     public PortfolioView getProfileViewByTraderId(Integer traderId) {
         //First check if tradeId is null
         if (traderId == null) {

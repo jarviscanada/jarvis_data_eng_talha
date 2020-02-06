@@ -32,7 +32,11 @@ public class OrderService {
         this.positionDao = positionDao;
     }
 
-    //Execute a market order
+    /**
+     * Execute a market order
+     * @param marketOrderDto
+     * @return SecurityOrder
+     */
     public SecurityOrder executeMarketOrder(MarketOrderDto marketOrderDto) {
         //First we need to check if size and ticker are null or if size is 0
         if (marketOrderDto.getSize() == null || marketOrderDto.getSize() == 0
@@ -68,7 +72,12 @@ public class OrderService {
         return securityOrderDao.save(securityOrder);
     }
 
-    //Helper method that executes a buy order
+    /**
+     * Helper method that executes a buy order
+     * @param marketOrderDto
+     * @param securityOrder
+     * @param account
+     */
     protected void handleBuyMarketOrder(MarketOrderDto marketOrderDto, SecurityOrder securityOrder,
                                         Account account) {
         Double cost = securityOrder.getPrice() * securityOrder.getSize();
@@ -85,7 +94,12 @@ public class OrderService {
         }
     }
 
-    //Helper method that executes a sell order
+    /**
+     * Helper method that executes a sell order
+     * @param marketOrderDto
+     * @param securityOrder
+     * @param account
+     */
     protected void handleSellMarketOrder(MarketOrderDto marketOrderDto, SecurityOrder securityOrder,
                                          Account account) {
         Position position = positionDao.findById(account.getId()).orElseThrow(() ->
