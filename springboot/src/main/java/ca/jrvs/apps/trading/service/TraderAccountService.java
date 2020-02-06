@@ -27,7 +27,11 @@ public class TraderAccountService {
         this.securityOrderDao = securityOrderDao;
     }
 
-    //Create a new trader and initialize a new account with 0 amount
+    /**
+     * Create a new trader and initialize a new account with 0 amount
+     * @param trader
+     * @return TraderAccountView of created trader
+     */
     public TraderAccountView createTraderAndAccount(Trader trader) {
         //First we need to check if any fields other than id are null
         if (trader.getFirstName() == null || trader.getLastName() == null || trader.getDob() == null
@@ -53,7 +57,10 @@ public class TraderAccountService {
         return traderAccountView;
     }
 
-    //A trader can be deleted iff it has no open position and 0 cash balance
+    /**
+     * A trader can be deleted iff it has no open position and 0 cash balance
+     * @param traderId
+     */
     public void deleteTraderById(Integer traderId) {
         //First lets do all checks and return IllegalArgumentException if needed
         if (traderId == null) {
@@ -71,7 +78,12 @@ public class TraderAccountService {
         traderDao.deleteById(traderId);
     }
 
-    //Deposit a fund to an account by traderId
+    /**
+     * Deposit a fund to an account by traderId
+     * @param traderId
+     * @param fund
+     * @return Account
+     */
     public Account deposit(Integer traderId, Double fund) {
         //First lets do all checks and return IllegalArgumentException if needed
         if (traderId == null) {
@@ -93,7 +105,12 @@ public class TraderAccountService {
         return accountDao.save(account);
     }
 
-    //Withdraw a fund to an account by traderId
+    /**
+     * Withdraw a fund to an account by traderId
+     * @param traderId
+     * @param fund
+     * @return Account
+     */
     public Account withdraw(Integer traderId, Double fund) {
         //First lets do all checks and return IllegalArgumentException if needed
         if (traderId == null) {
