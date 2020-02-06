@@ -59,23 +59,23 @@ sudo docker image ls -f reference=trading-app
 
 7.	Start up a database container attached to the trading-net network
 ``` Bash
-sudo docker run --name trading-psql-dev \ 
--e POSTGRES_PASSWORD=password \ 
--e POSTGRES_DB=jrvstrading \ 
--e POSTGRES_USER=postgres \ 
---network trading-net \ 
+sudo docker run --name trading-psql-dev \
+-e POSTGRES_PASSWORD=password \
+-e POSTGRES_DB=jrvstrading \
+-e POSTGRES_USER=postgres \
+--network trading-net \
 -d -p 5432:5432 trading-psql
 ```
 
 8.	Start up a trading application container attached to the trading-net network
 ``` Bash
-sudo docker run --name trading-app-dev \ 
--e "PSQL_URL=jdbc:postgresql://trading-psql-dev:5432/jrvstrading" \ 
--e "PSQL_USER=postgres" \ 
--e "PSQL_PASSWORD=password" \ 
--e "IEX_PUB_TOKEN=${IEX_PUB_TOKEN}" \ 
---network trading-net \ 
--p 5000:5000 -t trading-app
+sudo docker run --name trading-app-dev \
+-e "PSQL_URL=jdbc:postgresql://trading-psql-dev:5432/jrvstrading" \
+-e "PSQL_USER=postgres" \
+-e "PSQL_PASSWORD=password" \
+-e "IEX_PUB_TOKEN=${IEX_PUB_TOKEN}" \
+--network trading-net \
+-p 5000:8080 -t trading-app
 ```
 
 9. Verify if both containers are up and running
