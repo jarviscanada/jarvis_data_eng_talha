@@ -11,14 +11,14 @@ public class FibonacciNumberTest {
     @Test
     public void fibRecursive() {
         assertEquals(1, fibonacciNumber.fibRecursive(1));
-        assertEquals(55, fibonacciNumber.fibRecursive(9));
-        assertEquals(89, fibonacciNumber.fibRecursive(10));
+        assertEquals(34, fibonacciNumber.fibRecursive(9));
+        assertEquals(55, fibonacciNumber.fibRecursive(10));
     }
 
     @Test
     public void fibDynamic() {
         assertEquals(1, fibonacciNumber.fibDynamic(1));
-        assertEquals(55, fibonacciNumber.fibDynamic(9));
-        assertEquals(89, fibonacciNumber.fibDynamic(10));
+        assertEquals(34, fibonacciNumber.fibDynamic(9));
+        assertEquals(55, fibonacciNumber.fibDynamic(10));
     }
 }
