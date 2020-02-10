@@ -2,6 +2,7 @@ package ca.jrvs.practice.codingChallenge;
 
 public class FibonacciNumber {
 
+    // Big-O: O(2 ^ n), exponential because of recursion
     public int fibRecursive (int num) {
         if (num <= 1) {
             return num;
@@ -11,6 +12,7 @@ public class FibonacciNumber {
         }
     }
 
+    // Big-O: O(n) as we only have one for loop iteration
     public int fibDynamic (int num) {
         int[] result = new int[num + 1];
 
