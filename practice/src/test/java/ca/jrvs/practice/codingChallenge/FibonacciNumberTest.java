@@ -16,9 +16,9 @@ public class FibonacciNumberTest {
     }
 
     @Test
-    public void fibDynamin() {
-        assertEquals(1, fibonacciNumber.fibDynamin(1));
-        assertEquals(55, fibonacciNumber.fibDynamin(9));
-        assertEquals(89, fibonacciNumber.fibDynamin(10));
+    public void fibDynamic() {
+        assertEquals(1, fibonacciNumber.fibDynamic(1));
+        assertEquals(55, fibonacciNumber.fibDynamic(9));
+        assertEquals(89, fibonacciNumber.fibDynamic(10));
     }
 }

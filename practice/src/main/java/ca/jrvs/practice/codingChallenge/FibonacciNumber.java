@@ -11,7 +11,7 @@ public class FibonacciNumber {
         }
     }
 
-    public int fibDynamin (int num) {
+    public int fibDynamic (int num) {
         int[] result = new int[num + 1];
 
         if (num == 0 || num == 1) {
