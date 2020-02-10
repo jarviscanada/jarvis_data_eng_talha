@@ -3,8 +3,11 @@ package ca.jrvs.practice.codingChallenge;
 import java.util.LinkedList;
 import java.util.Queue;
 
+/**
+ * Stack is LIFO data structure but Queue is FIFO, this class implements a Stack using a Queue
+ * @param <T> generic type T, most common type would be Integer however
+ */
 public class StackUsingQueues<T> {
-    //We can implement Stack using one Queue with the methods below
     Queue<T> queue = new LinkedList<>();
 
     /**

@@ -9,7 +9,7 @@ public class StackUsingQueuesTest {
     StackUsingQueues<Integer> stackUsingQueues = new StackUsingQueues<>();
 
     @Test
-    public void StackUsingQueuesTest() {
+    public void stackUsingQueuesTest() {
         assertEquals(true, stackUsingQueues.empty());
 
         stackUsingQueues.push(10);
