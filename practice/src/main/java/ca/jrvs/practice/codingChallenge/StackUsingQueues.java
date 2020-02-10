@@ -28,7 +28,7 @@ public class StackUsingQueues<T> {
 
     /**
      * pop operation is O(1) time complexity as it is a simple remove operation using
-     * LinkedList api and returns the last item which was removed in the queue
+     * remove method on the queue and returns the last item which was removed in the queue
      * @return the last item of the queue/stack (top most element)
      */
     public T pop() {
@@ -45,7 +45,7 @@ public class StackUsingQueues<T> {
 
     /**
      * Also O(1) time complexity and just returns if the stack is empty or not
-     * @return
+     * @return boolean value if empty or not
      */
     public boolean empty() {
         return queue.isEmpty();
