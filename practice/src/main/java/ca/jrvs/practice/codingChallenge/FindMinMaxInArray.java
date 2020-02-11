@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class FindMinMaxInArray {
     public int[] usingForLoop (int[] input) {
@@ -28,11 +29,11 @@ public class FindMinMaxInArray {
 
     public int[] usingStreams (int[] input) {
         int[] result = new int[2];
-        int min = Arrays.stream(input)
+        int min = IntStream.of(input)
                 .min()
                 .getAsInt();
 
-        int max = Arrays.stream(input)
+        int max = IntStream.of(input)
                 .max()
                 .getAsInt();
 
