@@ -20,7 +20,7 @@ public class ValidParentheses {
             if (map.containsValue(c)) {
                 stack.push(c);
             }
-            //char is closing bracket
+            //char is closing bracket, pop from stack
             else {
                 if (stack.empty()) {
                     return false;
@@ -28,6 +28,7 @@ public class ValidParentheses {
 
                 Character top = stack.pop();
                 if (map.get(c) != top) {
+                    //if char is not closing bracket return false
                     return false;
                 }
             }
