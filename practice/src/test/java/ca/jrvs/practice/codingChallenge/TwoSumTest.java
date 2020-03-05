@@ -15,7 +15,7 @@ public class TwoSumTest {
     int[] array2 = {1, 2, 3};
     int target2 = 5;
     int[] array3 = {9, 8, 7, 6, 5, 4, 3, 2, 1};
-    int target3 = 7;
+    int target3 = 7; 
 
     @Test
     public void twoSumBruteForce() {
