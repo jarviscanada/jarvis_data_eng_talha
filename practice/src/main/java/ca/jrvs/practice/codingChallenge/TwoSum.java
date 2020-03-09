@@ -26,7 +26,7 @@ public class TwoSum {
             }
         }
         return new int[] {-1,-1};
-        //throw new IllegalArgumentException("No two nums in the array add up to target");
+        // or we can throw new IllegalArgumentException("No two nums in the array add up to target");
     }
 
     /**

@@ -8,7 +8,6 @@ import java.util.Map;
 import static org.junit.Assert.*;
 
 public class CompareTwoMapsTest {
-
     CompareTwoMaps compareTwoMaps = new CompareTwoMaps();
 
     private Map<Integer, Integer> map1 = new HashMap<>();

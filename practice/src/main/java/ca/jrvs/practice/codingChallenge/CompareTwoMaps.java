@@ -26,7 +26,7 @@ public class CompareTwoMaps {
             }
         }
 
-        //If we get past the for loop, we know both maps have same key value pairs
+        //if we get past the for loop, we know both maps have same key value pairs
         return true;
     }
 
