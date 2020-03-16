@@ -6,29 +6,29 @@ pipeline {
     }
 
     environment {
-        app_name = 'trading-app'
+        app_name = 'trading-app-eb2'
     }
 
     stages {
         stage('Build') {
             steps {
-                sh 'cd springboot && mvn clean package -DskipTests'
+                sh 'cd cloud_devops && cd springboot && mvn clean package -DskipTests'
                 echo "app_name is ${env.app_name} "
-                archiveArtifacts 'springboot/target/*zip'
+                archiveArtifacts 'cloud_devops/springboot/target/*zip'
             }
         }
         stage('Deploy_dev') {
             when { branch 'develop' }
             steps {
                 echo "Current Branch is: ${env.GIT_BRANCH}"
-                sh "bash ./springboot/scripts/eb/eb_deploy.sh ${app_name} TradingApp-env"
+                sh "bash ./cloud_devops/springboot/scripts/eb/eb_deploy.sh ${app_name} TradingApp-env"
             }
         }
         stage('Deploy_prod') {
             when { branch 'master' }
             steps {
                 echo "Current Branch is: ${env.GIT_BRANCH}"
-                sh "./springboot/scripts/eb/eb_deploy.sh ${app_name} TradingApp-prod"
+                sh "./cloud_devops/springboot/scripts/eb/eb_deploy.sh ${app_name} TradingApp-prod"
             }
         }
     }
