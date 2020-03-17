@@ -33,7 +33,7 @@ Below is our cloud application architecture diagram:
 
 Below is a diagram of our Deployment Environment:
 
-![DeploymentEnvironments](./assets/deployment_environments.jpg)
+![DeploymentEnvironments](./assets/deployment_environments2.jpg)
 
 -   The DEV environment consists of EC2 and RDS instances I created that run our application and the database. It's common that developers share the same DEV env and deploy GIT `feature` and `development` branches. This environment is not available to external teams or clients.
 -   The PROD environment will be consumed by clients. The master branch will be deployed. 
