@@ -9,7 +9,7 @@
 
 ## Introduction
 
-The purpose of this project was to deploy the Springboot trading-app microservice on the Amazon Web Services (AWS) cloud. Since the app's usage may vary during the day, it should be scalable, elastic, and high available which is achievable if deployed on AWS. The cloud services that I used are AWS's Elastic Cloud Compute (EC2), Amazon Relational Database Service (RDS), and AWS's Elastic Beanstalk (EB). I will go into further detail about each of these services below. Furthermore, I also created a Continuous Integration (CI)/Continuous Delivery (CD) pipeline using Jenkins to automate and fasten the deployment life cycle.
+The purpose of this project was to deploy the Springboot trading-app microservice on the Amazon Web Services (AWS) cloud. Since the app's usage may vary during the day, it should be scalable, elastic, and highly available which is achievable if deployed on AWS. The cloud services that I used are AWS's Elastic Cloud Compute (EC2), Amazon Relational Database Service (RDS), and AWS's Elastic Beanstalk (EB). I will go into further detail about each of these services below. Furthermore, I also created a Continuous Integration (CI)/Continuous Delivery (CD) pipeline using Jenkins to automate and fasten the deployment life cycle.
 
 ## Cloud Application Architecture
 
@@ -33,7 +33,7 @@ Below is our cloud application architecture diagram:
 
 Below is a diagram of our Deployment Environment:
 
-![DeploymentEnvironments](./assets/deployment_environments2.jpg)
+![DeploymentEnvironments](./assets/deployment_environments.jpg)
 
 -   The DEV environment consists of EC2 and RDS instances I created that run our application and the database. It's common that developers share the same DEV env and deploy GIT `feature` and `development` branches. This environment is not available to external teams or clients.
 -   The PROD environment will be consumed by clients. The master branch will be deployed. 
